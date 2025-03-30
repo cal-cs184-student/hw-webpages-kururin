@@ -56,8 +56,19 @@
 		-->
 
 		<h2>Overview</h2>
-		In this project I learned about how to render a 3D scene. It started off with implementing ray intercections in order to sample and visualize the objects. Then, I implemented a bounding volume hierachy in order to increase the speed of the renderings. Finally, the rest of the project focused on rendering realistic lighting, staring with direct light and moving to indirect light, along with adpative sampling. 
-		<div style="display: flex; flex-direction: column; align-items: center;">
+		In this project, I learned how to render a 3D scene.
+		<br/><br/>
+The project started with Part 1, where I generated camera rays by transforming image coordinates into camera space. I then used these rays to detect intersections with spheres and triangles, allowing me to sample and visualize the objects.
+<br/><br/>
+In Part 2, I implemented a bounding volume hierarchy (BVH) to accelerate rendering, improving performance from linear to logarithmic scaling. This was achieved by reducing the number of ray-object intersection checks, skipping areas where the ray never intersects the bounding box. This part took the longest because debugging was difficult—errors in one component could affect others. I eventually resolved my issue after realizing I wasn’t properly handling cases where the ray enters but does not exit the bounding box.
+<br/><br/>
+The rest of the project focused on realistic lighting. In Part 3, I implemented direct lighting, including zero-bounce and one-bounce lighting. One-bounce lighting used either uniform or importance sampling. Uniform sampling applied the diffuse BRDF, creating a softer look but introducing more noise, whereas importance sampling accounted for light sources directly, allowing for faster convergence. This part took the longest to render due to the large number of images, all requiring high samples per pixel.
+<br/><br/>
+Part 4 introduced indirect lighting, building on Part 3. Indirect lighting was achieved by recursively tracing multiple bounces of light, using the one-bounce lighting method to accumulate illumination. To improve efficiency, I implemented Russian Roulette to probabilistically terminate paths and reduce unnecessary computations.
+<br/><br/>
+Finally, Part 5 focused on adaptive sampling. This involved tracking the mean and variance of sample illuminance to determine when a pixel had sufficiently converged. If the confidence interval fell below a threshold, sampling would stop early, reducing unnecessary calculations while maintaining accuracy.
+<br/><br/>
+<div style="display: flex; flex-direction: column; align-items: center;">
 			<br/>· · ────── ꒰ঌ·✦·໒꒱ ────── · · <br/><br/>
 		</div>
 
