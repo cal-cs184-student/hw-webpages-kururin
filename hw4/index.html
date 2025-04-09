@@ -67,8 +67,10 @@
 		<br/><br/>
 		Part 4 was similar where I handled self-collision. Instead of changing the positions when the cloth collides with a different object, I keep checking if it collides with itself by checking if it has another pointmass that shares the same hash_position, and is less than 2 * thickness. If it collides with another pointmass, we change the point mass's position based on the average of all correction vectors.
 		<br/><br/>
-		Finally, in part 5 is where I implemented different shaders. It started with diffuse shading, then Blinn-Phong shading which incoperated a combination of diffuse, ambient, and specular shading. Then, I also added texture mapping which took color values from a texture. This was followed by bump and displaement mapping which gives the material a 3D feeling as for bump-mapping the normal vectors are modified and for displacement-mapping, the vertex locations are directly altered.
-		Lastly, I incorporated a mirror shader and a custom shader.
+		Next, in part 5 is where I implemented different shaders. It started with diffuse shading, then Blinn-Phong shading which incoperated a combination of diffuse, ambient, and specular shading. Then, I also added texture mapping which took color values from a texture. This was followed by bump and displaement mapping which gives the material a 3D feeling as for bump-mapping the normal vectors are modified and for displacement-mapping, the vertex locations are directly altered.
+		Then, I incorporated a mirror shader and a custom shader as well. 
+		<br/><br/>
+		Lastly, I added an additional cloth simulation feature - a way to move the cloth by adding the feature to the UI.
 		
 		<div style="display: flex; flex-direction: column; align-items: center;">
 			<br/>· · ────── ꒰ঌ·✦·໒꒱ ────── · · <br/><br/>
@@ -405,6 +407,50 @@
 				<figcaption>Custom Shader 3rd view</figcaption>
 			</figure>  
 		  	</div>
+
+			  <h2>Part 6: Extra Credit - Additional cloth simulation features!</h2>
+			 <b>Adding Cloth Movement to UI</b><br/>
+			 I added to the UI to incorporate a way to move the entire cloth at once by entering the x, y, and/or z offset.
+			  To do this, I first edited cloth.cpp & cloth.h to create a function that would offset each point mass's both last and current position by the inputed Vector3D.
+			Then, in clothSimulator.cpp, I followed the format for the gravity UI to create the UI needed for my cloth movement. 
+			This incuded making the value set to a new vector that contained how much the offset was in each coordinate and calling the function made earlier to offset the cloth in response to inputs to the UI.
+			With this, it allows us to test out more ways the cloth can interact with other objects by moving it around pre and mid simulation. This can also let us observe how the cloth interacts in places hard to see, like where it meets the sphere by moving the cloth away from the sphere mid-simulation.
+			 <br/><br/>
+			 <div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+					<tr>
+					  <td style="text-align: center;">
+						<img src="images/ec1.png" width="400px"/>
+						<figcaption>Moved Cloth before any Simulation</figcaption>
+					  </td>
+					  <td style="text-align: center;">
+						<img src="images/ec2.png" width="400px"/>
+						<figcaption>Mid-Simulation after Cloth has been Moved</figcaption>
+					  </td>
+					</tr>
+					<tr>
+						<td style="text-align: center;">
+						  <img src="images/ec3.png" width="400px"/>
+						  <figcaption>Moved Y Mid-Simulation</figcaption>
+						</td>
+						<td style="text-align: center;">
+						  <img src="images/ec4.png" width="400px"/>
+						  <figcaption>Moved Z Mid-Simulation</figcaption>
+						</td>
+					  </tr>
+					  <tr>
+						<td style="text-align: center;">
+						  <img src="images/ec5.png" width="400px"/>
+						  <figcaption>Moved X & Z Mid-Simulation</figcaption>
+						</td>
+						<td style="text-align: center;">
+						  <img src="images/ec6.png" width="400px"/>
+						  <figcaption>Moved X, Y & Z Mid-Simulation</figcaption>
+						</td>
+					  </tr>
+				  </table>
+				  </div>
+	
 		<div style="display: flex; flex-direction: column; align-items: center;">
 			<br/>· · ────── ꒰ঌ·✦·໒꒱ ────── · · <br/><br/>
 			<img src="images/casgif.gif" alt="castorice" style="width:60%"/>
